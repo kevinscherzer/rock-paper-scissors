@@ -5,9 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+    <header>
+        <div id="logo">
+            <img src="./images/labelLogoPlain.svg">
+        </div>
+    </header>
+
+    <aside id="how-to-play">
+
+    </aside>
+
+    <main id="game-area">
+        <button id="play-game-btn" class="button">PLAY ROCK, PAPER, SCISSORS!</button>
+        <div class="display"></div>
+        <div id="player-choice">
+            <div class="player-choice-btn" id="rock">
+                <img src="./images/rockNeon.svg" alt="rock icon" class="icon rock">
+                <img src="./images/rockLabelNeonPlain.svg" alt="rock label" class="label rock">
+            </div>
+            <div class="player-choice-btn" id="paper">
+                <img src="./images/paperNeon.svg" alt="paper icon" class="icon paper">
+                <img src="./images/paperLabelNeonPlain.svg" alt="paper label" class="label paper">
+            </div>
+            <div class="player-choice-btn" id="scissors">
+                <img src="./images/scissorsNeon.svg" alt="scissors icon" class="icon scissors">
+                <img src="./images/scissorsLabelNeonPlain.svg" alt="scissors label" class="label scissors">
+            </div>
+        </div>
+
+    </main>
 
     <script src="rockPaperScissors.js"></script>
 </body>
