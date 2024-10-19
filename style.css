@@ -31,7 +31,7 @@ img {
 }
 
 #logo img {
-    max-width: 420px;
+    max-width: 320px;
     width: 60vw;
     height: auto;
 }
@@ -39,15 +39,32 @@ img {
 #game-area {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
 #game-area .display {
     min-height: 50px;
     width: 80vw;
-    text-align: center;
     color: white;
-    font-size: large;
+    background: none;
+    font-family: "Neon", sans-serif;
+    font-size: 2em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 0 10px 0;
+    max-height: 110px;
+    height: 12vh;
+    max-width: 30vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(10, 10, 10);
+    border-radius: 20px;
+}
+
+#game-area .display p {
+    text-align: center;
+    white-space: pre;
 }
 
 #game-area .button {
@@ -91,8 +108,31 @@ img {
     width: 100vw;
 }
 
+@media screen and (max-width: 1400px) {
+    #game-area .display {
+        min-width: 420px;
+    }
+
+    body {
+        padding: 3vh 10vb;
+    }
+}
+
 @media screen and (max-width: 700px) {
     #game-area #player-choice {
         flex-wrap: wrap;
+    }
+
+    #game-area #player-choice .player-choice-btn img {
+        max-width: 80px;
+    }
+
+    #game-area .display {
+        width: 80vw;
+
+    }
+
+    #game-area .display p {
+        text-wrap: pretty;
     }
 }

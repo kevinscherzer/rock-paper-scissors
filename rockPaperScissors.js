@@ -35,22 +35,31 @@ function playRound(humanChoice, computerChoice) {
     const computerSelection = getComputerChoice();
     //compare the choices to deklare the winner
     if (humanSelection === computerSelection) {
-        console.log(`you both coose ${humanSelection}. It's a tie!`)
+        winnerDeclaration.textContent = `${humanSelection} vs ${computerSelection}\r\nIt's a tie!`;
+        display.insertBefore(winnerDeclaration, computerPoints);
     } else if (humanSelection === "rock" && computerSelection === "scissors") {
-        console.log(`You choose ${humanSelection}, the Computer choose ${computerSelection}. Congratulations you won`)
+        winnerDeclaration.textContent = `${humanSelection} vs ${computerSelection}\r\nyou won`;
+        display.insertBefore(winnerDeclaration, computerPoints);
         humanScore += 1;
+        playerPoints.textContent = `Player :\r\n${humanScore}`;
     } else if (humanSelection === "scissors" && computerSelection === "paper") {
-        console.log(`You choose ${humanSelection}, the Computer choose ${computerSelection}. Congratulations you won`)
-        humanScore += 1
-    } else if (humanSelection === "paper" && computerSelection === "rock") {
-        console.log(`You choose ${humanSelection}, the Computer choose ${computerSelection}. Congratulations you won`)
+        winnerDeclaration.textContent = `${humanSelection} vs ${computerSelection}\r\nyou won`;
+        display.insertBefore(winnerDeclaration, computerPoints);
         humanScore += 1;
+        playerPoints.textContent = `Player :\r\n${humanScore}`;
+    } else if (humanSelection === "paper" && computerSelection === "rock") {
+        winnerDeclaration.textContent = `${humanSelection} vs ${computerSelection}\r\nyou won`;
+        display.insertBefore(winnerDeclaration, computerPoints);
+        humanScore += 1;
+        playerPoints.textContent = `Player :\r\n${humanScore}`;
     } else {
-        console.log(`You choose ${humanSelection}, the Computer choose ${computerSelection}. You lost`)
+        winnerDeclaration.textContent = `${humanSelection} vs ${computerSelection}\r\nYou lost`;
+        display.insertBefore(winnerDeclaration, computerPoints);
         computerScore += 1;
+        computerPoints.textContent = `CPU :\r\n${computerScore}`;
     }
     if (humanScore === 5) {
-        const winner = "You";
+        const winner = "Player";
         getGameWinner(winner);
     } else if (computerScore === 5) {
         const winner = "Computer";
@@ -62,49 +71,72 @@ let humanScore = 0;
 let computerScore = 0;
 //play 5 rounds
 function startGame() {
-    console.log('Game Started');
     startGameBtn.style.display = "none";
     PLAYAGAIN.style.display = "none";
     playerSelectionBlock.style.display = "flex";
     humanScore = 0;
     computerScore = 0;
+    playerPoints.textContent = 'Player :\r\n0';
+    computerPoints.textContent = 'CPU :\r\n0';
 };
 
 function getGameWinner(winner) {
-    winnerDeclaration.textContent = `${winner} is the winner!!!`;
-    display.appendChild(winnerDeclaration);
+    playerPoints.textContent = '';
+    computerPoints.textContent = '';
+    winnerDeclaration.textContent = `${winner} is the winner!!!\r\n${humanScore} vs ${computerScore}`;
     playerSelectionBlock.style.display = 'none';
     PLAYAGAIN.style.display = "block";
-    display.appendChild(PLAYAGAIN);
+    gameArea.appendChild(PLAYAGAIN);
 };
 
-//playGame();
+//Setup display to show points and who won
 const display = document.querySelector('.display');
+display.style.display = 'none';
+display.style.justifyContent = 'space-between';
+
+const winnerDeclaration = document.createElement('p');
+winnerDeclaration.style.textAlign = 'center';
+const playerPoints = document.createElement('p');
+const computerPoints = document.createElement('p');
+
+display.appendChild(playerPoints);
+display.appendChild(computerPoints);
+
 
 const startGameBtn = document.querySelector('#play-game-btn');
 const playerSelectionBlock = document.querySelector('#player-choice');
 
 const playerSelectionBtn = document.querySelectorAll('.player-choice-btn');
-for (let button of playerSelectionBtn) {
+
+playerSelectionBtn.forEach(button => {
     button.addEventListener("click", () => {
         const buttonPressed = button.id;
         playRound(buttonPressed);
     });
-}
+});
+/*for (let button of playerSelectionBtn) {
+                button.addEventListener("click", () => {
+                    const buttonPressed = button.id;
+                    playRound(buttonPressed);
+                });
+}*/
 
 
-const winnerDeclaration = document.createElement('p');
 
-const PLAYAGAIN = document.createElement('button');
-PLAYAGAIN.textContent = "PLAY AGAIN?";
-PLAYAGAIN.classList.add("button");
-PLAYAGAIN.id = 'winner-text';
+const PLAYAGAIN = document.querySelector('#play-again-btn');
+PLAYAGAIN.style.display = "none";
 PLAYAGAIN.addEventListener("click", () => {
     display.removeChild(winnerDeclaration);
-    display.removeChild(PLAYAGAIN);
+    gameArea.removeChild(PLAYAGAIN);
+    display.appendChild(playerPoints);
+    display.appendChild(computerPoints);
     startGame();
 });
 
+const gameArea = document.querySelector('#game-area');
 
 
-startGameBtn.addEventListener('click', startGame);
+startGameBtn.addEventListener('click', () => {
+    display.style.display = "flex";
+    startGame();
+});
